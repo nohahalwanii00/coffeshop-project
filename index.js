@@ -3,7 +3,7 @@ import mysql from "mysql";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import "dotenv/config";
-
+ 
 
 const app = express();
 
@@ -12,10 +12,10 @@ const JWT_SECRET = process.env.JWT_SECRET;
 app.use(express.json());
 
 const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
+  host: process.env.DB_HOST || process.env.MYSQLHOST,
+  user: process.env.DB_USER || process.env.MYSQLUSER,
+  password: process.env.DB_PASS || process.env.MYSQLPASSWORD,
+  database: process.env.DB_NAME || process.env.MYSQLDATABASE,
 });
 
 db.connect((err) => {
@@ -139,10 +139,12 @@ function verifyToken(req, res, next) {
   }
 }
 
+
 app.get("/", (req, res) => {
   res.send("Backend is running");
 });
 
-app.listen(5004, () => {
-  console.log("Server running on port 5004");
+const PORT = process.env.PORT || 5004;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
