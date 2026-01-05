@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: coffeshop-backend
+    runtime: node
+    env: node
+    plan: free
+    autoDeploy: true
+    buildCommand: npm install
+    startCommand: npm run start
+    region: oregon
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: DB_HOST
+        fromSecret: DB_HOST
+      - key: DB_PORT
+        fromSecret: DB_PORT
+      - key: DB_USER
+        fromSecret: DB_USER
+      - key: DB_PASS
+        fromSecret: DB_PASS
+      - key: DB_NAME
+        fromSecret: DB_NAME
+      - key: JWT_SECRET
+        fromSecret: JWT_SECRET
