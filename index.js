@@ -18,8 +18,7 @@ const db = mysql.createConnection({
   database: process.env.DB_NAME || process.env.MYSQLDATABASE,
   port: Number(process.env.DB_PORT || process.env.MYSQLPORT || 3306),
 });
-  port: Number(process.env.DB_PORT || process.env.MYSQLPORT || 3306),
-});
+
 
 db.connect((err) => {
   if (err) console.log(" MySQL error", err);
